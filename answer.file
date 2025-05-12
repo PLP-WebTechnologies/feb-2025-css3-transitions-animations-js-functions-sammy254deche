@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="animateBtn">Click Me!</button>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+/* style.css */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animated {
+  animation: pulse 0.6s ease-in-out;
+}
+
+
+
+// script.js
+
+// Load and display stored click count
+let clickCount = localStorage.getItem("clickCount") || 0;
+const button = document.getElementById("animateBtn");
+button.textContent = `Clicked ${clickCount} times`;
+
+// Button click handler
+button.addEventListener("click", () => {
+  clickCount++;
+  localStorage.setItem("clickCount", clickCount);
+  button.textContent = `Clicked ${clickCount} times`;
+  button.classList.add("animated");
+  setTimeout(() => button.classList.remove("animated"), 600);
+});
